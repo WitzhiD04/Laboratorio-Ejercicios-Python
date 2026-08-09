@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse
+import matplotlib.patches as patches
 
 #plt.show()
 
@@ -65,13 +65,37 @@ print("--------------------------- ACA COMIENZA EL EJERCICIO--------------------
 class Ellipse(object):
 
     # Constructor
-    def __init__(self, width=2, height=3, color='r'):
+    def __init__(self, width, height, color1='r', color2='b'):
         self.height = height
         self.width = width
-        self.color = color
+        self.color1 = color1
+        self.color2 = color2
+        self.xy = (0,0)
+    
+    def setWidth(self, width):
+        self.width = width
+
+    def setHeight(self, height):
+        self.height = height
+
+    def setcolor1(self, color1):
+        self.color1 = color1
+    
+    def setcolor2(self, color2):
+        self.color2 = color2
 
     # Method
-    def drawRectangle(self):
-        plt.gca().add_patch(plt.Rectangle((0, 0), self.width, self.height ,fc=self.color))
+    def drawEllipse(self):
+        plt.gca().add_patch(patches.Ellipse(self.xy, width = self.width, height = self.height, facecolor = self.color1, edgecolor = self.color2))
         plt.axis('scaled')
         plt.show()
+
+
+ellipse = Ellipse(1, 2, 'red', 'blue')
+ellipse.drawEllipse()
+
+ellipse.setHeight(20)
+ellipse.setWidth(45)
+ellipse.setcolor1('yellow')
+ellipse.setcolor2('green')
+ellipse.drawEllipse()
